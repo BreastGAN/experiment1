@@ -1,0 +1,25 @@
+FROM tensorflow/tensorflow:1.5.0-py3
+
+LABEL maintainer="Ondrej Skopek <oskopek@oskopek.com>"
+
+# TensorBoard
+EXPOSE 6006
+# IPython
+EXPOSE 8888
+
+# Set up our notebook config.
+COPY docker/jupyter_notebook_config.py /root/.jupyter/
+
+# Copy the repo.
+COPY / /ml
+WORKDIR "/ml"
+
+# Update and create data_out
+RUN apt-get update && \
+    apt-get install -y \
+    git && \
+    mkdir data_out && \
+    ./setup/create_venv.sh
+
+ENTRYPOINT ["./docker/run.sh"]
+CMD []

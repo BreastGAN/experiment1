@@ -1,0 +1,164 @@
+= BreastGAN
+
+BreastGAN, first experiment.
+
+=== https://arxiv.org/abs/1811.07767[Paper]
+
+https://github.com/BreastGAN/[Injecting and removing malignant features in mammography with CycleGAN: Investigation of an automated adversarial attack using neural networks]
+
+https://www.researchgate.net/profile/Anton_Becker2[Anton S. Becker] 1,2),  https://www.researchgate.net/profile/Lukas_Jendele[Lukas Jendele]\* 3), https://oskopek.com/[Ondrej Skopek]\* 3), Nicole Berger 1), Soleen Ghafoor 1,4), Magda Marcon 1), http://www.vision.ee.ethz.ch/~kender/[Ender Konukoglu] 5)
+
+1) Institute of Diagnostic and Interventional Radiology, University Hospital of Zurich; Zurich, Switzerland
+2) Department of Health Sciences and Technology, ETH Zurich; Zurich, Switzerland
+3) Department of Computer Science, ETH Zurich
+4) Department of Radiology, Memorial Sloan Kettering Cancer Center, New York City, USA
+5) Computer Vision Laboratory, Department of Information Technology and Electrical Engineering, ETH Zurich
+
+In arXiv, 2018. (\* joint contribution)
+
+Correspondence to: Anton S. Becker, Institute of Diagnostic and Interventional Radiology, UniversitätsSpital Zürich, Raemistrasse 100, CH-8091 Zürich
+E-Mail: anton.becker@usz.ch
+
+== Citation
+If you use this code for your research, please cite our https://arxiv.org/abs/1811.07767[paper]:
+
+```
+@misc{BreastGAN2018,
+  title={Injecting and removing malignant features in mammography with CycleGAN: Investigation of an automated adversarial attack using neural networks},
+  author={Becker, Anton S. and Jendele, Lukas and Skopek, Ondrej and Berger, Nicole and Ghafoor, Soleen and Marcon, Magda and Konukoglu, Ender},
+  eprint={1811.07767},
+  archivePrefix="arXiv",
+  primaryClass = "quant-ph",
+  year={2018}
+}
+```
+
+== Related Projects
+
+https://github.com/junyanz/CycleGAN[CycleGAN]: Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks. Software that can generate photos from paintings, turn horses into zebras, perform style transfer, and more.
+
+== Requirements and versions:
+
+* Python 3.5
+* Git
+* Tensorflow 1.5
+
+*Important:* When commiting, remember to be *in* the virtual environment,
+for hooks to work.
+
+*NOTE:* All code in Jupyter Notebooks is purely experimental. Use at your own risk.
+
+== Setup
+
+Make sure there is no `venv/` directory in your repository. If there is, remove it.
+Run the following commands:
+```
+./setup/create_venv.sh
+source venv/bin/activate
+```
+
+*Important:* For all commands here, we assume you are source into
+the virtual environment: `source venv/bin/activate`
+
+== Jupyter notebooks
+
+*NOTE:* All code in Jupyter Notebooks is purely experimental. Use at your own risk.
+
+Save notebooks in the `notebooks/` directory.
+These can also be worked on locally using Jupyter.
+In the project root directory, you can run either:
+
+* `jupyter notebook`,
+* or `jupyter lab`.
+
+Add the following cell to your notebook, ideally in a "section":
+
+```
+# noqa
+import os
+wd = %pwd
+print('Current directory:', wd)
+if wd.endswith('notebooks'):
+    %cd ..
+```
+
+== Docker / Custom runner
+
+After you have build a Docker image using:
+`make build-cpu` or `make build-gpu` (or pulling one from the remote Docker hub),
+you can use the Docker wrapper:
+
+* Jupyter on Docker: `./run_docker.sh PASSWORD jupyter`.
+** To execute a specific notebook and print its output to stdout, use: `./run_docker.sh PASSWORD notebook NOTEBOOK_FILE`
+*** Do note that `NOTEBOOK_FILE` is a path relative to the repository root and must also be present in the image!
+** For both of these commands, `PASSWORD` is the password you want to set for the Jupyter web interface.
+** You can access it at http://localhost:8888/.
+** Same applies to `./run_docker.sh PASSWORD lab`.
+* Python models on Docker: `./run_docker.sh PASSWORD model MODEL_MODULE FLAG_FILE`
+** For example: `./run_docker.sh PASSWORD model models.breast_cycle_gan_graph flags/cyclegan.json`
+** Do note that `MODEL_MODULE` and `FLAG_FILE` are paths relative to the repository root and must also be present in the image!
+** This will automatically run Tensorboard on http://localhost:6006/
+
+Without the wrapper:
+
+```
+docker run IMG jupyter # runs Jupyter
+docker run IMG lab # runs JupyterLab
+docker run IMG notebook notebooks/test.ipynb # Runs the notebook
+docker run IMG model models.breast_cycle_gan_graph flags/cyclegan.json # Runs the MNIST GAN graph model with flags from the specified file
+```
+
+=== Using the run script without Docker
+
+You can also use the above commands without using Docker, by invoking the run script directly:
+
+```
+./docker/run.sh jupyter # runs Jupyter
+./docker/run.sh lab # runs JupyterLab
+./docker/run.sh notebook notebooks/test.ipynb # Runs the notebook
+./docker/run.sh model models.mnist_gan_graph flags/gan.json # Runs the MNIST GAN graph model with flags from the specified file
+```
+
+== Directory structure
+
+* `data_in/` -- input data and associated scripts/configs
+* `data_out/` -- output data and logs + associated scripts/configs
+* `docker/` -- setup and configs for running stuff inside and outside of Docker
+* `flags/` -- command line flags, model parameters, etc.
+* `models/` -- scripts defining the models + hyperparameters
+* `notebooks/` -- data exploration and other rapid development notebooks
+** Models from here should eventually be promoted into `models/`
+* `resources/` -- Python utilities
+* `setup/` -- environment setup and verification scripts in Python/Bash
+* `venv/` -- the (local) Python virtual environment
+
+== Formatting
+
+Run: `./setup/clean.sh`.
+A Git hook will tell you if any files are misformatted before committing.
+
+== Third Party code used in this project
+
+=== ICNR
+
+https://github.com/kostyaev/ICNR by Dmitry Kostyaev
+
+Licensed under the MIT Licence.
+
+In: `models/utils/icnr.py`
+
+=== Tensor2Tensor
+
+https://github.com/tensorflow/tensor2tensor by The Tensor2Tensor Authors.
+
+Licensed under the Apache License Version 2.0.
+
+In: `models/breast_cycle_gan`
+
+=== TensorFlow, TensorFlow Models
+
+https://github.com/tensorflow/tensorflow, https://github.com/tensorflow/models by The TensorFlow Authors.
+
+Licensed under the Apache License Version 2.0.
+
+In: `models/breast_cycle_gan`

@@ -1,0 +1,27 @@
+{
+    "data": {
+        "in_file": "data_in/images_256x256.npz", // Input data file.
+        "out_dir": "data_out" // Directory where to write event logs and checkpoint. Will create a $MODEL_RUN directory in it.
+    },
+    "training": {
+        "checkpoint_dir": "checkpoints", // Directory in data/out_dir/$MODEL_RUN where to write checkpoints.
+        "no_gpu": false, // Disables GPU usage even if a GPU is available
+        "log_interval": 50, // How many steps to wait before logging training statistics.
+        "save_interval": 1, // How many epochs to wait before saving model checkpoint.
+        "threads": 4, // How many CPU threads should training use (max)
+        "seed": 42 // Random seed
+    },
+    "model": {
+        "optimization": {
+            "epochs": 200, // Training epoch count
+            "learning_rate": 2e-4, // Learning rate
+            "batch_size": 1, // Training batch size
+            "pool_size": 50, // Size of pool of faked images
+            "lambda_a": 10, // Optimization constant for consistency loss
+            "lambda_b": 10 // Optimization constant for consistency losss
+        }
+    },
+    "eval": {
+        "num_test_samples": 36 // Number of samples to generate at test time
+    }
+}
