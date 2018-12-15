@@ -6,29 +6,28 @@ BreastGAN, first experiment.
 
 https://github.com/BreastGAN/[Injecting and removing malignant features in mammography with CycleGAN: Investigation of an automated adversarial attack using neural networks]
 
-https://www.researchgate.net/profile/Anton_Becker2[Anton S. Becker] 1,2),  https://www.researchgate.net/profile/Lukas_Jendele[Lukas Jendele]\* 3), https://oskopek.com/[Ondrej Skopek]\* 3), Nicole Berger 1), Soleen Ghafoor 1,4), Magda Marcon 1), http://www.vision.ee.ethz.ch/~kender/[Ender Konukoglu] 5)
+https://www.researchgate.net/profile/Anton_Becker2[Anton S. Becker] 1,2),  https://www.researchgate.net/profile/Lukas_Jendele[Lukas Jendele]* 3), https://oskopek.com/[Ondrej Skopek]* 3), Nicole Berger 1), Soleen Ghafoor 1,4), Magda Marcon 1), http://www.vision.ee.ethz.ch/~kender/[Ender Konukoglu] 5)
 
-1) Institute of Diagnostic and Interventional Radiology, University Hospital of Zurich; Zurich, Switzerland
-2) Department of Health Sciences and Technology, ETH Zurich; Zurich, Switzerland
-3) Department of Computer Science, ETH Zurich
-4) Department of Radiology, Memorial Sloan Kettering Cancer Center, New York City, USA
-5) Computer Vision Laboratory, Department of Information Technology and Electrical Engineering, ETH Zurich
+1. Institute of Diagnostic and Interventional Radiology, University Hospital of Zurich; Zurich, Switzerland
+2. Department of Health Sciences and Technology, ETH Zurich; Zurich, Switzerland
+3. Department of Computer Science, ETH Zurich
+4. Department of Radiology, Memorial Sloan Kettering Cancer Center, New York City, USA
+5. Computer Vision Laboratory, Department of Information Technology and Electrical Engineering, ETH Zurich
 
-In arXiv, 2018. (\* joint contribution)
+In arXiv, 2018. (* joint contribution)
 
 Correspondence to: Anton S. Becker, Institute of Diagnostic and Interventional Radiology, UniversitätsSpital Zürich, Raemistrasse 100, CH-8091 Zürich
+
 E-Mail: anton.becker@usz.ch
 
 == Citation
 If you use this code for your research, please cite our https://arxiv.org/abs/1811.07767[paper]:
 
 ```
-@misc{BreastGAN2018,
-  title={Injecting and removing malignant features in mammography with CycleGAN: Investigation of an automated adversarial attack using neural networks},
-  author={Becker, Anton S. and Jendele, Lukas and Skopek, Ondrej and Berger, Nicole and Ghafoor, Soleen and Marcon, Magda and Konukoglu, Ender},
-  eprint={1811.07767},
-  archivePrefix="arXiv",
-  primaryClass = "quant-ph",
+@article{BreastGAN2018,
+  title={{Injecting and removing malignant features in mammography with CycleGAN: Investigation of an automated adversarial attack using neural networks}},
+  author={Becker, Anton S and Jendele, Lukas and Skopek, Ondrej and Berger, Nicole and Ghafoor, Soleen and Marcon, Magda and Konukoglu, Ender},
+  journal={arXiv preprint arXiv:1811.07767},
   year={2018}
 }
 ```
